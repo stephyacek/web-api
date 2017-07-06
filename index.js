@@ -4,12 +4,19 @@ const bodyParser = require('body-parser')
 
 const app = express()
 
-const note = []
+const myNotes = []
 
 app.use(bodyParser.json())
 
+app.get('/my-notes', (req, res) => {
+  res.json(myNotes)
+})
 
+app.post('/my-notes', (req, res) => {
+  myNotes.push(req.body)
+  res.send('Successfully added note.')
+})
 
-app.listen(3000, ()=> {
+app.listen(3000, () => {
   console.log('Listening on 3000')
 })
