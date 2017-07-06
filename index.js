@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 
 const app = express()
 
+
 const myNotes = [
   {
     id: 1,
@@ -19,6 +20,7 @@ const myNotes = [
     comments: 'Pea horseradish azuki bean lettuce avocado asparagus okra.'
   }
 ]
+
 
 app.use(bodyParser.json())
 
