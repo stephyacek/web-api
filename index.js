@@ -5,7 +5,6 @@ const bodyParser = require('body-parser')
 
 const app = express()
 
-
 const myNotes = [
   {
     id: 1,
@@ -21,7 +20,6 @@ const myNotes = [
   }
 ]
 
-
 app.use(bodyParser.json())
 
 app.get('/my-notes', (req, res) => {
@@ -31,6 +29,18 @@ app.get('/my-notes', (req, res) => {
 app.post('/my-notes', (req, res) => {
   myNotes.push(req.body)
   res.sendStatus(201)
+})
+
+app.put('/my-notes/:id', (req, res) => {
+  const noteId = parseInt(req.params.id, 10)
+  const note = myNotes.find((note) => {
+    return note.id === noteId
+  })
+  if (!note) {
+    return res.sendStatus(404)
+  }
+  Object.assign(note, req.body)
+  res.sendStatus(200)
 })
 
 app.listen(3000, () => {
